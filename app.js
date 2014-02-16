@@ -13,7 +13,7 @@ var wx_token = process.env.WX_TOKEN;
 
 require('./rules')(webot);
 
-webot.watch(app, { token: wx_token, path: '/wechat' });
+webot.watch(app, { token: wx_token, path: '/' });
 
 app.use(express.cookieParser());
 app.use(express.session({ secret: process.env.SESS_SECRET, store: new RedisStore }));
