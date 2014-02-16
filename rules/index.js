@@ -15,7 +15,7 @@ var package_info = require('../package.json');
  * 初始化路由规则
  */
 module.exports = exports = function(webot){
-  var reg_help = /^(help|\?)$/i
+  var reg_help = /^(help|\?)$/i;
   webot.set({
     // name 和 description 都不是必须的
     name: 'hello help',
@@ -26,18 +26,16 @@ module.exports = exports = function(webot){
     },
     handler: function(info){
       var reply = {
-        title: '感谢你收听webot机器人',
-        pic: 'https://raw.github.com/node-webot/webot-example/master/qrcode.jpg',
-        url: 'https://github.com/node-webot/webot-example',
+        title: '感谢你收听『程序人生』',
+        pic: 'https://raw.github.com/tyrchen/weixin/master/qrcode.jpg',
+        url: 'http://tchen.me',
         description: [
           '你可以试试以下指令:',
-            'game : 玩玩猜数字的游戏吧',
-            's+空格+关键词 : 我会帮你百度搜索喔',
-            's+空格+nde : 可以试试我的纠错能力',
-            '使用「位置」发送你的经纬度',
-            '重看本指令请回复help或问号',
+            '回复：『文章』，可以查看我的最新博客',
+            '使用「位置」发送你的地图，我将告诉你我们有多远',
+            '重看本指令请回复help或?',
             '更多指令请回复more',
-            'PS: 点击下面的「查看全文」将跳转到我的github页'
+            'PS: 点击下面的「查看全文」将跳转到我的博客'
         ].join('\n')
       };
       // 返回值如果是list，则回复图文消息列表
@@ -63,7 +61,7 @@ module.exports = exports = function(webot){
     // pattern 既可以是函数，也可以是 regexp 或 字符串(模糊匹配)
     pattern: /who|你是[谁\?]+/i,
     // 回复handler也可以直接是字符串或数组，如果是数组则随机返回一个子元素
-    handler: ['我是神马机器人', '微信机器人']
+    handler: ['我是神马', '程序人生']
   });
 
   // 正则匹配后的匹配组存在 info.query 中
@@ -81,43 +79,6 @@ module.exports = exports = function(webot){
   // 简单的纯文本对话，可以用单独的 yaml 文件来定义
   require('js-yaml');
   webot.dialog(__dirname + '/dialog.yaml');
-
-  // 支持一次性加多个（方便后台数据库存储规则）
-  webot.set([{
-    name: 'morning',
-    description: '打个招呼吧, 发送: good morning',
-    pattern: /^(早上?好?|(good )?moring)[啊\!！\.。]*$/i,
-    handler: function(info){
-      var d = new Date();
-      var h = d.getHours();
-      if (h < 3) return '[嘘] 我这边还是深夜呢，别吵着大家了';
-      if (h < 5) return '这才几点钟啊，您就醒了？';
-      if (h < 7) return '早啊官人！您可起得真早呐~ 给你请安了！\n 今天想参加点什么活动呢？';
-      if (h < 9) return 'Morning, sir! 新的一天又开始了！您今天心情怎么样？';
-      if (h < 12) return '这都几点了，还早啊...';
-      if (h < 14) return '人家中午饭都吃过了，还早呐？';
-      if (h < 17) return '如此美好的下午，是很适合出门逛逛的';
-      if (h < 21) return '早，什么早？找碴的找？';
-      if (h >= 21) return '您还是早点睡吧...';
-    }
-  }, {
-    name: 'time',
-    description: '想知道几点吗? 发送: time',
-    pattern: /^(几点了|time)\??$/i,
-    handler: function(info) {
-      var d = new Date();
-      var h = d.getHours();
-      var t = '现在是服务器时间' + h + '点' + d.getMinutes() + '分';
-      if (h < 4 || h > 22) return t + '，夜深了，早点睡吧 [月亮]';
-      if (h < 6) return t + '，您还是再多睡会儿吧';
-      if (h < 9) return t + '，又是一个美好的清晨呢，今天准备去哪里玩呢？';
-      if (h < 12) return t + '，一日之计在于晨，今天要做的事情安排好了吗？';
-      if (h < 15) return t + '，午后的冬日是否特别动人？';
-      if (h < 19) return t + '，又是一个充满活力的下午！今天你的任务完成了吗？';
-      if (h <= 22) return t + '，这样一个美好的夜晚，有没有去看什么演出？';
-      return t;
-    }
-  }]);
 
   // 等待下一次回复
   webot.set('guess my sex', {
@@ -329,41 +290,14 @@ module.exports = exports = function(webot){
     }
   });
 
-  //图片
-  webot.set('check_image', {
-    description: '发送图片,我将返回其hash值',
-    pattern: function(info){
-      return info.is('image');
-    },
-    handler: function(info, next){
-      verbose('image url: %s', info.param.picUrl);
-      try{
-        var shasum = crypto.createHash('md5');
-
-        var req = require('request')(info.param.picUrl);
-
-        req.on('data', function(data) {
-          shasum.update(data);
-        });
-        req.on('end', function() {
-          return next(null, '你的图片hash: ' + shasum.digest('hex'));
-        });
-      }catch(e){
-        error('Failed hashing image: %s', e)
-        return '生成图片hash失败: ' + e;
-      }
-    }
-  });
 
   // 回复图文消息
   webot.set('reply_news', {
-    description: '发送news,我将回复图文消息你',
-    pattern: /^news\s*(\d*)$/,
+    description: '发送『文章』,我将回复我的最新博客给你',
+    pattern: /^文章\s*(\d*)$/,
     handler: function(info){
       var reply = [
-        {title: '微信机器人', description: '微信机器人测试帐号：webot', pic: 'https://raw.github.com/node-webot/webot-example/master/qrcode.jpg', url: 'https://github.com/node-webot/webot-example'},
-        {title: '豆瓣同城微信帐号', description: '豆瓣同城微信帐号二维码：douban-event', pic: 'http://i.imgur.com/ijE19.jpg', url: 'https://github.com/node-webot/weixin-robot'},
-        {title: '图文消息3', description: '图文消息描述3', pic: 'https://raw.github.com/node-webot/webot-example/master/qrcode.jpg', url: 'http://www.baidu.com'}
+        {title: '最新博客', description: '最新博客', pic: 'http://tchen.me/assets/files/posts/latest.jpg', url: 'http://tchen.me/posts/latest.html'},
       ];
       // 发送 "news 1" 时只回复一条图文消息
       return Number(info.param[1]) == 1 ? reply[0] : reply;
