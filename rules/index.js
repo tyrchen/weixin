@@ -135,7 +135,7 @@ module.exports = exports = function(webot){
           return '你到底还猜不猜嘛！';
         }
         return '看来你真的不想猜啊';
-      },
+      }
     }
 
     // 也可以用一个函数搞定:
