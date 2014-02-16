@@ -7,7 +7,7 @@ PATH=deployment/$(PROJECT)
 SUPERVISORCTL=/usr/bin/supervisorctl
 SSH=/usr/bin/ssh
 ECHO=/bin/echo -e
-NPM=/usr/local/bin/npm
+NPM=/usr/bin/npm
 SUDO=/usr/bin/sudo
 
 
