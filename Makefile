@@ -13,7 +13,7 @@ SUCOPY=/bin/sucopy
 
 
 start:
-	@export DEBUG=webot* && npm start
+	@export DEBUG=webot* && $(NPM) start
 
 clear:
 	@clear
