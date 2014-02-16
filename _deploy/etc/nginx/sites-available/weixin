@@ -1,0 +1,10 @@
+server {
+  listen 80;
+  server_name weixin.tchen.me;
+  access_log /var/log/nginx/weixin.access.log;
+  error_log /var/log/nginx/weixin.error.log;
+  location / {
+    proxy_pass http://localhost:7000;
+    include /etc/nginx/proxy_params;
+  }
+}
