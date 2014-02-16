@@ -9,6 +9,7 @@ SSH=/usr/bin/ssh
 ECHO=/bin/echo -e
 NPM=/usr/bin/npm
 SUDO=/usr/bin/sudo
+SUCOPY=/bin/sucopy
 
 
 start:
