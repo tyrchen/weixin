@@ -26,16 +26,19 @@ module.exports = exports = function(webot){
     },
     handler: function(info){
       var reply = {
-        title: '感谢你收听『程序人生』',
+        title: '同学，你很有眼光嘛，程序君在此等候你多时了，感谢你收听『程序人生』!',
         pic: 'https://raw.github.com/tyrchen/weixin/master/qrcode.jpg',
         url: 'http://tchen.me',
         description: [
-          '你可以试试以下指令:',
-            '回复：『文章』，可以查看我的最新博客',
-            '使用「位置」发送你的地图，我将告诉你我们有多远',
-            '重看本指令请回复help或?',
-            '更多指令请回复more',
-            'PS: 点击下面的「查看全文」将跳转到我的博客'
+          '程序君会尽量在每天早上8点为你奉上新鲜热辣的原创文章',
+            '如果你想看看我的历史文章：点右上角的头像-》查看历史文章即可',
+	  		'如果你对某篇文章有想法，欢迎给我留言，和我交流。程序君会定期查看和回复',
+	  		'如果你希望看到某个话题的文章，也欢迎留言告诉我。程序君会充分考虑你的意见！'
+            //'回复：『文章』，可以查看我的最新博客',
+            //'使用「位置」发送你的地图，我将告诉你我们有多远',
+            //'重看本指令请回复help或?',
+            //'更多指令请回复more',
+            //'PS: 点击下面的「查看全文」将跳转到我的博客'
         ].join('\n')
       };
       // 返回值如果是list，则回复图文消息列表
@@ -316,6 +319,7 @@ module.exports = exports = function(webot){
     // 你也可以将这些 message 存入数据库
     log('unhandled message: %s', info.text);
     info.flag = true;
-    return '你发送了「' + info.text + '」,可惜我太笨了,听不懂. 发送: help 查看可用的指令';
+    // return '你发送了「' + info.text + '」,可惜我太笨了,听不懂. 发送 help 或 ? 查看可用的指令';
+	return '亲！感谢你的留言，程序君每天会定期检查留言，每条必回。';
   });
 };
