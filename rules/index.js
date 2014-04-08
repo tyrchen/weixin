@@ -322,6 +322,6 @@ module.exports = exports = function(webot){
     log('unhandled message: %s', info.text);
     info.flag = true;
     // return '你发送了「' + info.text + '」,可惜我太笨了,听不懂. 发送 help 或 ? 查看可用的指令';
-    // return '亲！感谢你的留言，程序君每天会定期检查留言，每条必回。';
+    return '亲！感谢你的留言，程序君每天会定期检查留言，每条必回。';
   });
 };
