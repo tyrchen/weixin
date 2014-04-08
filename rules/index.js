@@ -31,9 +31,9 @@ module.exports = exports = function(webot){
         url: 'http://tchen.me',
         description: [
           '程序君会尽量在每天早上8点为你奉上新鲜热辣的原创文章',
-            '如果你想看看我的历史文章：点右上角的头像-》查看历史文章即可',
-	  		'如果你对某篇文章有想法，欢迎给我留言，和我交流。程序君会定期查看和回复',
-	  		'如果你希望看到某个话题的文章，也欢迎留言告诉我。程序君会充分考虑你的意见！'
+          '如果你想看看我的历史文章：点右上角的头像-》查看历史文章即可',
+          '如果你对某篇文章有想法，欢迎给我留言，和我交流。程序君会定期查看和回复',
+          '如果你希望看到某个话题的文章，也欢迎留言告诉我。程序君会充分考虑你的意见！'
             //'回复：『文章』，可以查看我的最新博客',
             //'使用「位置」发送你的地图，我将告诉你我们有多远',
             //'重看本指令请回复help或?',
@@ -68,6 +68,7 @@ module.exports = exports = function(webot){
   });
 
   // 正则匹配后的匹配组存在 info.query 中
+  /*
   webot.set('your_name', {
     description: '自我介绍下吧, 发送: I am [enter_your_name]',
     pattern: /^(?:my name is|i am|我(?:的名字)?(?:是|叫)?)\s*(.*)$/i,
@@ -78,6 +79,7 @@ module.exports = exports = function(webot){
     // 或者更简单一点
     handler: '你好,{1}'
   });
+  */
 
   // 简单的纯文本对话，可以用单独的 yaml 文件来定义
   require('js-yaml');
@@ -320,6 +322,6 @@ module.exports = exports = function(webot){
     log('unhandled message: %s', info.text);
     info.flag = true;
     // return '你发送了「' + info.text + '」,可惜我太笨了,听不懂. 发送 help 或 ? 查看可用的指令';
-	return '亲！感谢你的留言，程序君每天会定期检查留言，每条必回。';
+    // return '亲！感谢你的留言，程序君每天会定期检查留言，每条必回。';
   });
 };
