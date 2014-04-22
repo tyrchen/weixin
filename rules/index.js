@@ -25,6 +25,7 @@ module.exports = exports = function(webot){
       return info.is('event') && info.param.event === 'subscribe' || reg_help.test(info.text);
     },
     handler: function(info){
+      /*
       var reply = {
         title: '同学，你很有眼光嘛，程序君在此等候你多时了，感谢你收听『程序人生』!',
         pic: 'https://raw.github.com/tyrchen/weixin/master/qrcode.jpg',
@@ -41,6 +42,12 @@ module.exports = exports = function(webot){
             //'PS: 点击下面的「查看全文」将跳转到我的博客'
         ].join('\n')
       };
+      */
+      reply = "同学，你很有眼光嘛，感谢你收听『程序人生』!程序君会尽量在每天早上" +
+              "8点为你奉上新鲜热辣的原创文章。如果你对某篇文章有想法，欢迎给我留言，" + 
+              "和我交流。程序君会定期查看和回复。如果你希望看到某个话题的文章，" + 
+              "也欢迎留言告诉我。程序君会充分考虑你的意见！" + "为了方便读者交流，程序君" +
+              "创建了两个QQ群：「程序人生书友群」：群号306251161。500人；「程序人生python群」：群号372216987。欢迎加入。"
       // 返回值如果是list，则回复图文消息列表
       return reply;
     }
